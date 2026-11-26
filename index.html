@@ -1,0 +1,811 @@
+
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portofolio Muhammad Fauzan - Pelajar PPLG, Video Editor, dan Desainer Grafis.">
+    <title>Muhammad Fauzan | Personal Portfolio</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['DM Sans', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif']
+                    },
+                    colors: {
+                        accent: '#67e8f9',
+                        dark: '#080b12',
+                        surface: '#101620'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        h1, h2, h3, .display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        body {
+            background: #080b12;
+            color: #e5e7eb;
+            overflow-x: hidden;
+        }
+
+        .gradient-text {
+            background: linear-gradient(120deg, #67e8f9, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .glass {
+            background: rgba(17, 24, 39, 0.65);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            backdrop-filter: blur(16px);
+        }
+
+        .glow {
+            box-shadow: 0 0 50px rgba(103, 232, 249, 0.12);
+        }
+
+        .card {
+            background: #101620;
+            border: 1px solid #202a38;
+            transition: .3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(103, 232, 249, .45);
+            box-shadow: 0 15px 35px rgba(0,0,0,.25);
+        }
+
+        .section-label {
+            color: #67e8f9;
+            letter-spacing: 3px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .nav-link {
+            transition: .2s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #67e8f9;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .reveal.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-line {
+            background: linear-gradient(to bottom, #67e8f9, #818cf8, transparent);
+        }
+
+        ::selection {
+            background: #67e8f9;
+            color: #080b12;
+        }
+
+        #progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, #67e8f9, #818cf8);
+            z-index: 100;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+                animation-duration: .01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="progress"></div>
+
+    <!-- NAVBAR -->
+    <header class="fixed top-0 left-0 w-full z-50 glass">
+        <nav class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+
+            <a href="#home" class="display text-xl font-bold tracking-tight text-white">
+                FAU<span class="gradient-text">ZAN.</span>
+            </a>
+
+            <div class="hidden md:flex items-center gap-8 text-sm text-gray-400">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+
+            <a href="#contact"
+               class="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full bg-cyan-300 text-gray-950 text-sm font-bold hover:bg-cyan-200 transition">
+                Let's Talk <i class="fas fa-arrow-up-right-from-square text-xs"></i>
+            </a>
+
+            <button id="menuBtn" class="md:hidden text-xl text-white" aria-label="Buka menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden px-6 pb-6 bg-gray-950/95 border-t border-gray-800">
+            <div class="flex flex-col gap-5 pt-5 text-sm text-gray-300">
+                <a href="#home" class="mobile-link">Home</a>
+                <a href="#about" class="mobile-link">About</a>
+                <a href="#experience" class="mobile-link">Experience</a>
+                <a href="#skills" class="mobile-link">Skills</a>
+                <a href="#projects" class="mobile-link">Projects</a>
+                <a href="#contact" class="mobile-link">Contact</a>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- HERO -->
+    <section id="home" class="relative min-h-screen flex items-center pt-24 overflow-hidden">
+
+        <div class="absolute w-96 h-96 bg-cyan-500/10 blur-[120px] rounded-full -top-20 -left-20"></div>
+        <div class="absolute w-96 h-96 bg-indigo-500/10 blur-[120px] rounded-full bottom-0 right-0"></div>
+
+        <div class="max-w-6xl mx-auto px-6 py-20 w-full relative z-10">
+
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+
+                <div class="reveal">
+
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs text-cyan-300 mb-7">
+                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                        WELCOME TO MY PORTFOLIO
+                    </div>
+
+                    <p class="text-gray-400 text-sm mb-3">Hello, I'm</p>
+
+                    <h1 class="display text-5xl md:text-7xl font-bold leading-tight text-white">
+                        Muhammad
+                        <span class="gradient-text">Fauzan.</span>
+                    </h1>
+
+                    <h2 class="text-xl md:text-2xl text-gray-300 mt-5">
+                        Student <span class="text-cyan-300">PPLG</span> &
+                        Creative Enthusiast
+                    </h2>
+
+                    <p class="text-gray-400 leading-8 mt-6 max-w-lg">
+                        Saya adalah pelajar Pengembangan Perangkat Lunak dan Gim
+                        yang memiliki ketertarikan dalam dunia teknologi,
+                        video editing, dan desain grafis. Saya terus belajar,
+                        bereksperimen, dan mengembangkan kreativitas melalui
+                        berbagai proyek.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 mt-9">
+
+                        <a href="#projects"
+                           class="px-7 py-3.5 bg-cyan-300 text-gray-950 rounded-full font-bold text-sm hover:bg-cyan-200 transition">
+                            Explore My Work <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+
+                        <a href="#contact"
+                           class="px-7 py-3.5 border border-gray-700 rounded-full font-semibold text-sm hover:border-cyan-300 hover:text-cyan-300 transition">
+                            Contact Me
+                        </a>
+
+                    </div>
+
+                    <div class="flex items-center gap-6 mt-10 text-gray-500 text-xl">
+                        <a href="mailto:mf073917@gmail.com" aria-label="Email" class="hover:text-cyan-300 transition"><i class="fas fa-envelope"></i></a>
+                        <a href="https://wa.me/6289514957195" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="hover:text-green-400 transition"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://instagram.com/fa.uzan8114" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="hover:text-pink-400 transition"><i class="fab fa-instagram"></i></a>
+                    </div>
+
+                </div>
+
+                <!-- PROFILE IMAGE -->
+                <div class="flex justify-center reveal">
+
+                    <div class="relative">
+
+                        <div class="absolute inset-0 rounded-[40px] bg-gradient-to-br from-cyan-400 to-indigo-500 blur-2xl opacity-20"></div>
+
+                        <div class="relative w-64 h-80 md:w-80 md:h-[420px] rounded-[35px] border border-gray-700 overflow-hidden bg-gray-900 glow rotate-2 hover:rotate-0 transition duration-500">
+
+                            <img
+                                src="WhatsApp%20Image%202026-11-26%20at%2008.01.34.jpeg"
+                                alt="Foto profil Muhammad Fauzan"
+                                class="w-full h-full object-cover"
+                                onerror="this.style.display='none';document.getElementById('photoFallback').classList.remove('hidden');"
+                            >
+
+                            <div id="photoFallback" class="hidden absolute inset-0 flex flex-col items-center justify-center text-cyan-300">
+                                <i class="fas fa-user text-7xl mb-4"></i>
+                                <span class="font-bold">Muhammad Fauzan</span>
+                            </div>
+
+                            <div class="absolute inset-0 bg-gradient-to-t from-gray-950/80 via-transparent to-transparent"></div>
+
+                            <div class="absolute bottom-6 left-6">
+                                <p class="text-xs text-cyan-300 tracking-widest">CREATIVE MIND</p>
+                                <h3 class="display text-2xl font-bold text-white">Muhammad Fauzan</h3>
+                            </div>
+                        </div>
+
+                        <div class="absolute -bottom-5 -right-7 glass px-5 py-4 rounded-2xl">
+                            <p class="text-xs text-gray-400">Based in</p>
+                            <p class="text-sm font-bold text-white">
+                                <i class="fas fa-location-dot text-cyan-300 mr-2"></i>Jakarta, Indonesia
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ABOUT -->
+    <section id="about" class="py-28 px-6 bg-[#0c111a]">
+
+        <div class="max-w-6xl mx-auto">
+
+            <div class="reveal mb-14">
+                <p class="section-label">01 — ABOUT ME</p>
+                <h2 class="display text-4xl md:text-5xl font-bold text-white mt-4">
+                    Get to Know <span class="gradient-text">Me Better.</span>
+                </h2>
+                <p class="text-gray-400 mt-4 max-w-xl leading-7">
+                    Mengenal lebih dekat tentang diri saya, pendidikan,
+                    dan hal-hal yang saya sukai.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-5 gap-7">
+
+                <div class="md:col-span-3 card rounded-3xl p-8 reveal">
+
+                    <p class="text-gray-300 leading-8">
+                        Perkenalkan, saya <strong class="text-cyan-300">Muhammad Fauzan</strong>,
+                        pelajar SMK Cinta Kasih Tzu Chi jurusan
+                        Pengembangan Perangkat Lunak dan Gim (PPLG).
+                    </p>
+
+                    <p class="text-gray-400 leading-8 mt-5">
+                        Saya memiliki ketertarikan dalam bidang pemrograman,
+                        multimedia, dan desain kreatif. Saya terbiasa
+                        menggunakan Visual Studio Code untuk belajar
+                        pengembangan web serta CapCut, Adobe Lightroom,
+                        dan IbisPaint X untuk mengembangkan kemampuan visual.
+                    </p>
+
+                    <p class="text-gray-400 leading-8 mt-5">
+                        Saya memiliki kemampuan manajemen waktu yang baik,
+                        komunikasi, dan adaptasi. Saya percaya bahwa setiap
+                        pengalaman merupakan kesempatan untuk terus berkembang.
+                    </p>
+
+                    <div class="mt-8 pt-7 border-t border-gray-800">
+                        <p class="text-xs text-gray-500 tracking-widest mb-3">EDUCATION</p>
+                        <h3 class="font-bold text-white text-lg">SMK Cinta Kasih Tzu Chi</h3>
+                        <p class="text-sm text-cyan-300 mt-1">
+                            Pengembangan Perangkat Lunak dan Gim
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="md:col-span-2 grid grid-cols-2 gap-4 reveal">
+
+                    <div class="card rounded-2xl p-5 flex flex-col justify-center">
+                        <i class="fas fa-code text-2xl text-cyan-300 mb-4"></i>
+                        <h3 class="font-bold text-white">Development</h3>
+                        <p class="text-xs text-gray-500 mt-2">VS Code · HTML · CSS</p>
+                    </div>
+
+                    <div class="card rounded-2xl p-5 flex flex-col justify-center">
+                        <i class="fas fa-video text-2xl text-indigo-300 mb-4"></i>
+                        <h3 class="font-bold text-white">Video Editing</h3>
+                        <p class="text-xs text-gray-500 mt-2">CapCut · Lightroom</p>
+                    </div>
+
+                    <div class="card rounded-2xl p-5 flex flex-col justify-center">
+                        <i class="fas fa-palette text-2xl text-pink-300 mb-4"></i>
+                        <h3 class="font-bold text-white">Graphic Design</h3>
+                        <p class="text-xs text-gray-500 mt-2">Canva · IbisPaint X</p>
+                    </div>
+
+                    <div class="card rounded-2xl p-5 flex flex-col justify-center">
+                        <i class="fas fa-users text-2xl text-green-300 mb-4"></i>
+                        <h3 class="font-bold text-white">Teamwork</h3>
+                        <p class="text-xs text-gray-500 mt-2">Communication · Adaptability</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="py-28 px-6">
+
+        <div class="max-w-6xl mx-auto">
+
+            <div class="reveal mb-16">
+                <p class="section-label">02 — MY JOURNEY</p>
+                <h2 class="display text-4xl md:text-5xl font-bold text-white mt-4">
+                    Experience & <span class="gradient-text">Activities.</span>
+                </h2>
+                <p class="text-gray-400 mt-4">Pengalaman organisasi dan kegiatan yang pernah saya ikuti.</p>
+            </div>
+
+            <div class="relative ml-3 md:ml-5">
+
+                <div class="absolute left-0 top-2 bottom-0 w-px timeline-line"></div>
+
+                <!-- EXPERIENCE 1 -->
+                <div class="relative pl-10 pb-12 reveal">
+
+                    <div class="absolute -left-[7px] top-2 w-4 h-4 rounded-full bg-cyan-300 ring-4 ring-cyan-300/10"></div>
+
+                    <div class="card rounded-3xl p-7">
+
+                        <div class="flex flex-wrap justify-between gap-3 mb-5">
+                            <span class="text-xs font-bold text-cyan-300 bg-cyan-300/10 px-4 py-2 rounded-full">ORGANIZATION</span>
+                            <span class="text-xs text-gray-500">2025</span>
+                        </div>
+
+                        <div class="flex gap-4 items-start">
+                            <div class="hidden sm:flex w-12 h-12 shrink-0 rounded-xl bg-cyan-300/10 text-cyan-300 items-center justify-center text-xl">
+                                <i class="fas fa-mosque"></i>
+                            </div>
+
+                            <div>
+                                <h3 class="text-xl font-bold text-white">ROHIS SMK Cinta Kasih Tzu Chi</h3>
+                                <p class="text-sm text-cyan-300 mt-1">Sarana & Prasarana</p>
+
+                                <ul class="mt-5 space-y-3 text-sm text-gray-400">
+                                    <li><i class="fas fa-check text-cyan-300 mr-2"></i>Membuat daftar barang yang akan digunakan untuk acara Pesantren Kilat 2025.</li>
+                                    <li><i class="fas fa-check text-cyan-300 mr-2"></i>Menyusun dan merapikan perlengkapan yang digunakan selama acara berlangsung.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- EXPERIENCE 2 -->
+                <div class="relative pl-10 reveal">
+
+                    <div class="absolute -left-[7px] top-2 w-4 h-4 rounded-full bg-indigo-400 ring-4 ring-indigo-400/10"></div>
+
+                    <div class="card rounded-3xl p-7">
+
+                        <div class="flex flex-wrap justify-between gap-3 mb-5">
+                            <span class="text-xs font-bold text-indigo-300 bg-indigo-300/10 px-4 py-2 rounded-full">VOLUNTEER PROGRAM</span>
+                            <span class="text-xs text-gray-500">2025</span>
+                        </div>
+
+                        <div class="flex gap-4 items-start">
+                            <div class="hidden sm:flex w-12 h-12 shrink-0 rounded-xl bg-indigo-300/10 text-indigo-300 items-center justify-center text-xl">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Program SMK Mengajar</h3>
+                                <p class="text-sm text-indigo-300 mt-1">Pengajar / Fasilitator</p>
+
+                                <ul class="mt-5 space-y-3 text-sm text-gray-400">
+                                    <li><i class="fas fa-check text-indigo-300 mr-2"></i>Berpartisipasi dalam kegiatan mengajar di SMPN 122 Jakarta.</li>
+                                    <li><i class="fas fa-check text-indigo-300 mr-2"></i>Berpartisipasi dalam kegiatan mengajar di SMP Pelita Anugerah.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- SKILLS -->
+    <section id="skills" class="py-28 px-6 bg-[#0c111a]">
+
+        <div class="max-w-6xl mx-auto">
+
+            <div class="reveal mb-14">
+                <p class="section-label">03 — WHAT I CAN DO</p>
+                <h2 class="display text-4xl md:text-5xl font-bold text-white mt-4">
+                    My <span class="gradient-text">Skills.</span>
+                </h2>
+                <p class="text-gray-400 mt-4">Tools dan kemampuan yang saya gunakan untuk berkarya.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-7">
+
+                <!-- HARD SKILLS -->
+                <div class="card rounded-3xl p-8 reveal">
+
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-300/10 text-cyan-300 flex items-center justify-center text-xl">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Hard Skills</h3>
+                            <p class="text-xs text-gray-500 mt-1">Technical & Creative Skills</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2.5 rounded-xl bg-gray-800 text-sm text-gray-300">HTML & CSS</span>
+                        <span class="px-4 py-2.5 rounded-xl bg-gray-800 text-sm text-gray-300">Visual Studio Code</span>
+                        <span class="px-4 py-2.5 rounded-xl bg-gray-800 text-sm text-gray-300">CapCut</span>
+                        <span class="px-4 py-2.5 rounded-xl bg-gray-800 text-sm text-gray-300">Adobe Lightroom</span>
+                        <span class="px-4 py-2.5 rounded-xl bg-gray-800 text-sm text-gray-300">IbisPaint X</span>
+                        <span class="px-4 py-2.5 rounded-xl bg-gray-800 text-sm text-gray-300">Canva</span>
+                        <span class="px-4 py-2.5 rounded-xl bg-gray-800 text-sm text-gray-300">Microsoft Word</span>
+                        <span class="px-4 py-2.5 rounded-xl bg-gray-800 text-sm text-gray-300">Graphic Design</span>
+                        <span class="px-4 py-2.5 rounded-xl bg-gray-800 text-sm text-gray-300">Video Editing</span>
+                    </div>
+
+                </div>
+
+                <!-- SOFT SKILLS -->
+                <div class="card rounded-3xl p-8 reveal">
+
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-300/10 text-indigo-300 flex items-center justify-center text-xl">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Soft Skills</h3>
+                            <p class="text-xs text-gray-500 mt-1">Personal & Interpersonal Skills</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-300">Communication</span>
+                                <i class="fas fa-comments text-indigo-300"></i>
+                            </div>
+                            <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="h-full w-4/5 bg-indigo-400 rounded-full"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-300">Time Management</span>
+                                <i class="fas fa-clock text-indigo-300"></i>
+                            </div>
+                            <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="h-full w-[85%] bg-indigo-400 rounded-full"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-300">Adaptability</span>
+                                <i class="fas fa-arrows-rotate text-indigo-300"></i>
+                            </div>
+                            <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="h-full w-4/5 bg-indigo-400 rounded-full"></div>
+                            </div>
+                        </div>
+
+                        <p class="text-xs text-gray-500 pt-2">
+                            Visualisasi kemampuan secara kualitatif, bukan hasil tes atau sertifikasi.
+                        </p>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- PROJECTS -->
+    <section id="projects" class="py-28 px-6">
+
+        <div class="max-w-6xl mx-auto">
+
+            <div class="flex flex-wrap justify-between items-end gap-6 mb-14 reveal">
+                <div>
+                    <p class="section-label">04 — SELECTED WORKS</p>
+                    <h2 class="display text-4xl md:text-5xl font-bold text-white mt-4">
+                        Featured <span class="gradient-text">Projects.</span>
+                    </h2>
+                    <p class="text-gray-400 mt-4">Beberapa karya dan proyek yang saya kembangkan.</p>
+                </div>
+
+                <span class="text-sm text-gray-500">My Creative Playground ↗</span>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-7">
+
+                <!-- PROJECT 1 -->
+                <article class="card rounded-3xl overflow-hidden reveal">
+
+                    <div class="h-64 bg-gradient-to-br from-indigo-950 via-purple-900 to-gray-950 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute w-52 h-52 rounded-full border border-white/10"></div>
+                        <div class="absolute w-36 h-36 rounded-full border border-white/10"></div>
+
+                        <div class="text-center relative z-10">
+                            <i class="fas fa-shirt text-7xl text-white/80"></i>
+                            <p class="display text-xl font-bold mt-4 tracking-widest">STREETWEAR</p>
+                        </div>
+
+                        <span class="absolute top-5 left-5 text-xs text-white/70 bg-white/10 px-3 py-2 rounded-full">01 / DESIGN</span>
+                    </div>
+
+                    <div class="p-7">
+                        <p class="text-xs text-cyan-300 font-bold tracking-widest">GRAPHIC DESIGN</p>
+                        <h3 class="display text-2xl font-bold text-white mt-3">Clothing Design Project</h3>
+                        <p class="text-sm text-gray-400 leading-7 mt-3">
+                            Proyek pembelajaran desain pakaian yang berfokus pada
+                            pengembangan konsep visual, pemilihan warna, dan
+                            pembuatan desain kaos.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-5">
+                            <span class="text-xs text-gray-400 bg-gray-800 px-3 py-2 rounded-lg">Canva</span>
+                            <span class="text-xs text-gray-400 bg-gray-800 px-3 py-2 rounded-lg">IbisPaint X</span>
+                            <span class="text-xs text-gray-400 bg-gray-800 px-3 py-2 rounded-lg">Fashion</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PROJECT 2 -->
+                <article class="card rounded-3xl overflow-hidden reveal">
+
+                    <div class="h-64 bg-gradient-to-br from-cyan-950 via-slate-800 to-gray-950 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute w-64 h-64 border border-cyan-300/10 rounded-full"></div>
+                        <div class="absolute w-44 h-44 border border-cyan-300/10 rounded-full"></div>
+
+                        <div class="text-center relative z-10">
+                            <i class="fas fa-bag-shopping text-7xl text-cyan-200/80"></i>
+                            <p class="display text-xl font-bold mt-4 tracking-widest">PRODUCT DESIGN</p>
+                        </div>
+
+                        <span class="absolute top-5 left-5 text-xs text-white/70 bg-white/10 px-3 py-2 rounded-full">02 / DESIGN</span>
+                    </div>
+
+                    <div class="p-7">
+                        <p class="text-xs text-cyan-300 font-bold tracking-widest">PRODUCT PROMOTION</p>
+                        <h3 class="display text-2xl font-bold text-white mt-3">Product Sales Design</h3>
+                        <p class="text-sm text-gray-400 leading-7 mt-3">
+                            Proyek pembuatan desain visual untuk kebutuhan
+                            promosi dan penjualan produk di tempat Praktik
+                            Kerja Lapangan (PKL).
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-5">
+                            <span class="text-xs text-gray-400 bg-gray-800 px-3 py-2 rounded-lg">Canva</span>
+                            <span class="text-xs text-gray-400 bg-gray-800 px-3 py-2 rounded-lg">Graphic Design</span>
+                            <span class="text-xs text-gray-400 bg-gray-800 px-3 py-2 rounded-lg">Marketing</span>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <p class="text-center text-xs text-gray-600 mt-8">
+                Catatan: Gambar proyek di atas merupakan ilustrasi. Ganti dengan dokumentasi karya asli.
+            </p>
+
+        </div>
+    </section>
+
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-28 px-6 bg-[#0c111a]">
+
+        <div class="max-w-5xl mx-auto">
+
+            <div class="text-center reveal">
+
+                <p class="section-label">05 — GET IN TOUCH</p>
+
+                <h2 class="display text-4xl md:text-6xl font-bold text-white mt-5 leading-tight">
+                    Let's Create Something
+                    <span class="gradient-text">Amazing.</span>
+                </h2>
+
+                <p class="text-gray-400 max-w-xl mx-auto leading-8 mt-6">
+                    Punya ide menarik, ingin berkolaborasi, atau sekadar
+                    ingin berdiskusi? Jangan ragu untuk menghubungi saya.
+                    Saya terbuka untuk kesempatan dan pengalaman baru.
+                </p>
+
+                <a href="mailto:mf073917@gmail.com"
+                   class="inline-flex items-center gap-3 mt-9 px-8 py-4 bg-cyan-300 text-gray-950 rounded-full font-bold hover:bg-cyan-200 transition">
+                    Say Hello <i class="fas fa-arrow-up-right-from-square"></i>
+                </a>
+
+            </div>
+
+            <div class="grid sm:grid-cols-3 gap-5 mt-16">
+
+                <a href="mailto:mf073917@gmail.com"
+                   class="card rounded-2xl p-7 text-center reveal">
+                    <i class="fas fa-envelope text-2xl text-cyan-300"></i>
+                    <h3 class="text-white font-bold mt-4">Email</h3>
+                    <p class="text-xs text-gray-500 mt-2 break-all">mf073917@gmail.com</p>
+                </a>
+
+                <a href="https://wa.me/6289514957195"
+                   target="_blank" rel="noopener noreferrer"
+                   class="card rounded-2xl p-7 text-center reveal">
+                    <i class="fab fa-whatsapp text-2xl text-green-400"></i>
+                    <h3 class="text-white font-bold mt-4">WhatsApp</h3>
+                    <p class="text-xs text-gray-500 mt-2">+62 895-1495-7195</p>
+                </a>
+
+                <a href="https://instagram.com/fa.uzan8114"
+                   target="_blank" rel="noopener noreferrer"
+                   class="card rounded-2xl p-7 text-center reveal">
+                    <i class="fab fa-instagram text-2xl text-pink-400"></i>
+                    <h3 class="text-white font-bold mt-4">Instagram</h3>
+                    <p class="text-xs text-gray-500 mt-2">@fa.uzan8114</p>
+                </a>
+
+            </div>
+
+            <div class="text-center mt-10 text-sm text-gray-500">
+                <i class="fas fa-location-dot text-cyan-300 mr-2"></i>
+                Cengkareng Timur, Jakarta Barat, Indonesia
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer class="py-8 px-6 border-t border-gray-800 bg-[#080b12]">
+
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-5">
+
+            <a href="#home" class="display text-xl font-bold text-white">
+                FAU<span class="gradient-text">ZAN.</span>
+            </a>
+
+            <p class="text-xs text-gray-500 text-center">
+                © <span id="year"></span> Muhammad Fauzan. All rights reserved.
+            </p>
+
+            <a href="#home" class="text-xs text-gray-400 hover:text-cyan-300 transition">
+                Back to top <i class="fas fa-arrow-up ml-1"></i>
+            </a>
+
+        </div>
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+        // Mobile Navigation
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        menuBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.toggle('hidden');
+
+            menuBtn.setAttribute('aria-expanded', String(!isHidden));
+            menuBtn.innerHTML = isHidden
+                ? '<i class="fas fa-bars"></i>'
+                : '<i class="fas fa-xmark"></i>';
+        });
+
+        // Close mobile menu after clicking a link
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Reveal Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.12
+        });
+
+        document.querySelectorAll('.reveal').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Scroll Progress
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+            const progress = scrollHeight > 0
+                ? (scrollTop / scrollHeight) * 100
+                : 0;
+
+            document.getElementById('progress').style.width = progress + '%';
+        });
+
+        // Active Navigation
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.toggle(
+                            'active',
+                            link.getAttribute('href') === '#' + entry.target.id
+                        );
+                    });
+                }
+            });
+        }, {
+            rootMargin: '-35% 0px -55% 0px'
+        });
+
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+        // Dynamic Copyright Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+    </script>
+
+</body>
+</html>
